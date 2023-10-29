@@ -1,10 +1,8 @@
-﻿Module.register('MMM-PIR-Sensor',{
+﻿Module.register('MMM-MonitorSwitch',{
 	requiresVersion: '2.1.0',
 	defaults: {
 
 	},
-
-	userPresence: false,
 
 	// Override socket notification handler.
 	/*socketNotificationReceived: function (notification, payload) {
@@ -18,15 +16,14 @@
 		} else if (notification === 'SHOW_ALERT') {
 			this.sendNotification(notification, payload)
 		}
-	},
+	},*/
 
 	notificationReceived: function (notification, payload) {
-		if (notification === 'SCREEN_WAKEUP') {
-			this.sendNotification(notification, payload)
-		}
-	},*/
+		console.log('-----------' + notification)
+	},
 
 	start: function () {
 		Log.info('Starting module: ' + this.name);
+		this.sendSocketNotification("CONFIG", this.config);
 	}
 });

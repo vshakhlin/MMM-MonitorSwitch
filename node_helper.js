@@ -10,9 +10,16 @@ const NodeHelper = require("node_helper");
 const exec = require('child_process').exec;
 
 module.exports = NodeHelper.create({
+	start: function () {
+		console.log('Starting module helper MonitorSwitch');
+	},
+
 	socketNotificationReceived: function(notification, payload) {
-		var self = this;
+		console.log("++++++++++" + notification);
 		switch(notification) {
+			case "CONFIG":
+				this.config = payload;
+				break;
 			case "MONITOR_ON":
 				exec("/usr/bin/vcgencmd display_power 1", null);
 				break;
